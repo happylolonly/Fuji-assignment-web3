@@ -63,15 +63,17 @@ const Home: NextPage = () => {
         </form>
 
         {/* @ts-ignore */}
-        {data?.reverse().map((item, i) => {
-          const { author, message } = item;
-          return (
-            <div key={i}>
-              <h5>{author}</h5>
-              <p>{message}</p>
-            </div>
-          );
-        })}
+        {data &&
+          // @ts-ignore
+          [...data].reverse().map((item, i) => {
+            const { author, message } = item;
+            return (
+              <div key={i}>
+                <h5>{author}</h5>
+                <p>{message}</p>
+              </div>
+            );
+          })}
       </main>
 
       <footer className={styles.footer}>
