@@ -45,7 +45,7 @@ function Meow() {
     },
   });
 
-  useWaitForTransaction({
+  const waitTransactionRequest = useWaitForTransaction({
     hash: writeRequest.data?.hash,
     onSuccess: () => {
       toast.success("Meow confirmed!");
@@ -77,6 +77,7 @@ function Meow() {
           name="message"
           value={message}
           multiline
+          disabled={waitTransactionRequest.isLoading}
           rows={2}
           label="Your meow"
           placeholder="Write your meow here..."
@@ -85,12 +86,19 @@ function Meow() {
 
         <Button
           variant="contained"
-          disabled={!message || !writeRequest.write || writeRequest.isLoading}
+          disabled={
+            !message ||
+            !writeRequest.write ||
+            writeRequest.isLoading ||
+            waitTransactionRequest.isLoading
+          }
           className={styles.button}
           size="large"
           type="submit"
         >
-          {writeRequest.isLoading ? "Sending..." : "Send"}
+          {writeRequest.isLoading || waitTransactionRequest.isLoading
+            ? "Sending..."
+            : "Send"}
         </Button>
       </form>
 
