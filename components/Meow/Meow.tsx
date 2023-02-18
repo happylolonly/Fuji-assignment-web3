@@ -59,7 +59,6 @@ function Meow() {
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     writeRequest.write?.();
   }
 
